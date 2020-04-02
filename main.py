@@ -4,18 +4,15 @@ def menu():
   print("3. Exit")
 
 def displayList():
-  ###
-  # Complete this function
-  ###
-  pass
+  for item in shopping:
+    print(item)
 
 # main
 shopping = []
-fh = open("shopping.txt")
-
-###
-# Write the code to open the shopping file and read it into the list shopping
-###
+fh = open("shopping.txt", "r")
+for line in fh:
+  shopping.append(line.strip())
+fh.close()
 
 choice = 0
 while choice != 3:
@@ -24,15 +21,17 @@ while choice != 3:
   choice = int(input())
   if choice == 1:
     item = input("Enter item to add: ")
-    ###
-    # Complete code
-    ###
+    shopping.append(item)
   elif choice == 2:
     item = input("Enter item to delete: ")
-    ###
-    # Complete code, overwirite file
-    ###
+    if item in shopping:
+      idx = shopping.index(item)
+      shopping.pop(idx)
   elif choice == 3:
+    fh = open("shopping.txt", "w")
+    for item in shopping:
+      fh.write(item+"\n")
+    fh.close()
     break
     
 
